@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "module": "ES6",
+    "target": "ES2022"
+  },
+  "include": ["src/**/*.ts"],    // Files to include
+  "exclude": ["node_modules"]    // Files to exclude
+}

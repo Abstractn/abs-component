@@ -1,0 +1,31 @@
+{
+  "name": "@abs/component",
+  "version": "1.0.0",
+  "description": "associate HTML nodes to a class instance as if they are reusable and autonomous components",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Abstractn/abs-component.git"
+  },
+  "author": "Abstractn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Abstractn/abs-component/issues"
+  },
+  "homepage": "https://github.com/Abstractn/abs-component#readme",
+  "keywords": [
+    "typescript",
+    "javascript",
+    "component",
+    "quick",
+    "easy",
+    "simple",
+    "module"
+  ],
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  }
+}
