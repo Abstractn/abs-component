@@ -14,13 +14,14 @@ declare module 'AbsComponentManager' {
 
   export class AbsComponentManager {
     constructor (config?: AbsComponentManagerConfig);
-    static readonly DEFAULT_NODE_ATTRIBUTE_SELECTOR: string;
+    static readonly DEFAULT_NODE_ATTRIBUTE_SELECTOR: 'data-abs-component';
     readonly nodeAttributeSelector: string;
     readonly components: AbsComponentList;
     registerComponent(templateReferenceName: string, scriptClass: new (node: HTMLElement) => AbsComponent): void;
     initComponents(): void;
     initComponent(componentNode: HTMLElement): void;
-    getComponentByNode(componentNode: HTMLElement): AbsComponent | undefined;
+    getComponentByNode(componentNode: HTMLElement): AbsComponent | null;
     destroyComponent(component: AbsComponent): void;
+    purgeComponentsList(): void;
   }
 }
