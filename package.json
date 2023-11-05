@@ -1,10 +1,15 @@
 {
   "name": "@abs/component",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "associate HTML nodes to a class instance as if they are reusable and autonomous components",
-  "main": "dist/index.js",
+  "types": "dist/abs-component.d.ts",
+  "browser": "dist/abs-component.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "cleanDist": "rimraf dist",
+    "buildTypescript": "tsc",
+    "copyTypescript": "copyfiles -f ./src/*.ts dist",
+    "generateNxScript": "node ./build-utils/generateNxScript.js ./dist/abs-component.js",
+    "build": "npm run cleanDist && npm run buildTypescript && npm run copyTypescript && npm run generateNxScript"
   },
   "repository": {
     "type": "git",
@@ -12,6 +17,9 @@
   },
   "author": "Abstractn",
   "license": "MIT",
+  "files": [
+    "dist"
+  ],
   "bugs": {
     "url": "https://github.com/Abstractn/abs-component/issues"
   },
@@ -26,6 +34,7 @@
     "module"
   ],
   "devDependencies": {
+    "rimraf": "^5.0.5",
     "typescript": "^5.2.2"
   }
 }
