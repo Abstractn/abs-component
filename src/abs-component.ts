@@ -81,10 +81,10 @@ export class AbsComponentManager {
     }
   }
 
-  public getComponentByNode(componentNode: HTMLElement): AbsComponent | undefined {
-    let res: AbsComponent | undefined = undefined;
+  public getComponentByNode(componentNode: HTMLElement): AbsComponent | null {
+    let res: AbsComponent | null = null;
     const componentName = componentNode.getAttribute(this.nodeAttributeSelector);
-    if(this.components[componentName]) {
+    if(componentName && this.components[componentName]) {
       const componentSearchResult = this.components[componentName].find(componentInstance => componentInstance.node === componentNode);
       if(componentSearchResult) {
         res = componentSearchResult;
