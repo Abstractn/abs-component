@@ -1,5 +1,5 @@
 {
-  "name": "@abs/component",
+  "name": "abs-component",
   "version": "0.1.0",
   "description": "associate HTML nodes to a class instance as if they are reusable and autonomous components",
   "types": "dist/abs-component.d.ts",
