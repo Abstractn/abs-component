@@ -20,7 +20,7 @@ fs.readFile(inputFile, 'utf8', (err, data) => {
     return;
   }
 
-  const updatedData = data.replace(searchString, replacementString);
+  const updatedData = data.replaceAll(searchString, replacementString);
 
   fs.writeFile(outputFile, updatedData, 'utf8', (err) => {
     if (err) {
