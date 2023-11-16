@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 if (process.argv.length < 3) {
-  console.error('[generateNxScript.js] Usage: node replace.js <inputFile>');
+  console.error('[generateNxScript.js] Usage: node generateNxScript.js <inputFile>');
   process.exit(1);
 }
 
@@ -27,7 +27,5 @@ fs.readFile(inputFile, 'utf8', (err, data) => {
       console.error(err);
       return;
     }
-
-    //console.log('File updated and saved as ' + outputFile);
   });
 });
