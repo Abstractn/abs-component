@@ -1,5 +1,7 @@
 # Abs-Component
 
+[![npm version](https://badgen.net/npm/v/abs-component)](https://www.npmjs.com/package/abs-component) [![Install size](https://packagephobia.com/badge?p=abs-component)](https://packagephobia.com/result?p=abs-component)
+
 
 ## Introduction:
 
