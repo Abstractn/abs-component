@@ -124,4 +124,8 @@ export class AbsComponentManager {
       });
     });
   }
+
+  public getRegisteredComponentsList(): string[] {
+    return Object.keys(this.registeredComponentsList);
+  }
 }

@@ -20,4 +20,5 @@ export declare class AbsComponentManager {
   getComponentByNode(componentNode: HTMLElement): AbsComponent | null;
   destroyComponent(component: AbsComponent): void;
   purgeComponentsList(): void;
+  getRegisteredComponentsList(): string[];
 }
