@@ -10,19 +10,38 @@ This module allows you to define classes and associate an instance of them to an
 Its implementation remains rather simple and the main goal in mind is to give users a basic way of organizing the scripts for different elements in a page, especially in small projects such as static websites.
 
 
-## CDN:
+## Installation:
 
-Typescript:
-```https://abstractn.github.io/lib/abs-component.ts```
+#### - As module
+Install the module with your preferred package manager by typing the following in your terminal:
+```
+npm install -D abs-component
+```
+then import the module in your script
+```typescript
+import { AbsComponentManager } from 'abs-component';
+```
 
-Javascript (with export):
-```https://abstractn.github.io/lib/abs-component.js```
+#### - In browser
 
-Javascript (without export):
-```https://abstractn.github.io/lib/abs-component.nx.js```
+All available files are the following:
+```bash
+# Typescript
+https://cdn.jsdelivr.net/npm/abs-component/dist/abs-component.ts
 
-Browser iclusion:
-```<script src="https://abstractn.github.io/lib/abs-component.nx.js"></script>```
+# Javascript
+https://cdn.jsdelivr.net/npm/abs-component/dist/abs-component.js
+
+# Javascript without exports
+https://cdn.jsdelivr.net/npm/abs-component/dist/abs-component.nx.js
+```
+
+To include it for browser usage inser this in your `<head>`:
+```html
+<script src="https://cdn.jsdelivr.net/npm/abs-component@1/dist/abs-component.nx.js"></script>
+```
+
+> Remove `@1` after the package name from the link to load the latest version or specify the version by changing the number
 
 
 ## Component from the template side:
