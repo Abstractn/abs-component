@@ -27,9 +27,9 @@ export class AbsComponentManager {
     this.componentsClassList[templateReferenceName] = scriptClass;
   }
 
-  public initComponents(): void {
+  public initComponents(scopeNode?: HTMLElement): void {
     try {
-      document.querySelectorAll(`[${this.nodeAttributeSelector}]`).forEach((componentNode) => {
+      (scopeNode || document).querySelectorAll(`[${this.nodeAttributeSelector}]`).forEach((componentNode) => {
         const componentClassName = componentNode.getAttribute(this.nodeAttributeSelector);
         if(componentClassName === null) throw [`[ABS] The following node's component data attribute value is null:`, componentNode];
         if(this.componentsClassList[componentClassName] === undefined) throw `[ABS] Component initializer error: component "${componentClassName}" is not registered`;

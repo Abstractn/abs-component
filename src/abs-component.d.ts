@@ -15,7 +15,7 @@ export declare class AbsComponentManager {
   readonly components: AbsComponentList;
   private componentsClassList;
   registerComponent(templateReferenceName: string, scriptClass: new (node: HTMLElement) => AbsComponent): void;
-  initComponents(): void;
+  initComponents(scopeNode?: HTMLElement): void;
   initComponent(componentNode: HTMLElement): void;
   getComponentByNode(componentNode: HTMLElement): AbsComponent | null;
   destroyComponent(component: AbsComponent): void;
