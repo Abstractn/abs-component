@@ -1,6 +1,6 @@
 {
   "name": "abs-component",
-  "version": "1.0.1",
+  "version": "1.2.0",
   "description": "associate HTML nodes to a class instance as if they are reusable and autonomous components",
   "types": "dist/abs-component.d.ts",
   "browser": "dist/abs-component.js",
