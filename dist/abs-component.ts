@@ -21,22 +21,22 @@ export class AbsComponentManager {
   public readonly nodeAttributeSelector: string;
   public readonly components: AbsComponentList = {};
 
-  private componentsClassList: Record<string, new (node: HTMLElement) => AbsComponent> = {};
+  private registeredComponentsList: Record<string, new (node: HTMLElement) => AbsComponent> = {};
 
   public registerComponent(templateReferenceName: string, scriptClass: new (node: HTMLElement) => AbsComponent): void {
-    this.componentsClassList[templateReferenceName] = scriptClass;
+    this.registeredComponentsList[templateReferenceName] = scriptClass;
   }
 
-  public initComponents(): void {
+  public initComponents(scopeNode?: HTMLElement): void {
     try {
-      document.querySelectorAll(`[${this.nodeAttributeSelector}]`).forEach((componentNode) => {
+      (scopeNode || document).querySelectorAll(`[${this.nodeAttributeSelector}]`).forEach((componentNode) => {
         const componentClassName = componentNode.getAttribute(this.nodeAttributeSelector);
         if(componentClassName === null) throw [`[ABS] The following node's component data attribute value is null:`, componentNode];
-        if(this.componentsClassList[componentClassName] === undefined) throw `[ABS] Component initializer error: component "${componentClassName}" is not registered`;
+        if(this.registeredComponentsList[componentClassName] === undefined) throw `[ABS] Component initializer error: component "${componentClassName}" is not registered`;
         if(this.components[componentClassName] === undefined) {
           this.components[componentClassName] = [];
         }
-        const ComponentClass = this.componentsClassList[componentClassName];
+        const ComponentClass = this.registeredComponentsList[componentClassName];
         const componentInstance = new ComponentClass(componentNode as HTMLElement);
         componentInstance.init();
         this.components[componentClassName].push(componentInstance);
@@ -61,11 +61,11 @@ export class AbsComponentManager {
     try {
       const componentClassName = componentNode.getAttribute(this.nodeAttributeSelector);
       if(componentClassName === null) throw [`[ABS] The following node's component data attribute value is null:`, componentNode];
-      if(this.componentsClassList[componentClassName] === undefined) throw `[ABS] Component initializer error: component "${componentClassName}" is not registered`;
+      if(this.registeredComponentsList[componentClassName] === undefined) throw `[ABS] Component initializer error: component "${componentClassName}" is not registered`;
       if(this.components[componentClassName] === undefined) {
         this.components[componentClassName] = [];
       }
-      const ComponentClass = this.componentsClassList[componentClassName];
+      const ComponentClass = this.registeredComponentsList[componentClassName];
       const componentInstance = new ComponentClass(componentNode);
       componentInstance.init();
       this.components[componentClassName].push(componentInstance);
@@ -123,5 +123,9 @@ export class AbsComponentManager {
         if(!isComponentAlive) this.destroyComponent(component);
       });
     });
+  }
+
+  public getRegisteredComponentsList(): string[] {
+    return Object.keys(this.registeredComponentsList);
   }
 }
