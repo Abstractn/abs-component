@@ -13,7 +13,7 @@ export declare class AbsComponentManager {
   static readonly DEFAULT_NODE_ATTRIBUTE_SELECTOR = "data-abs-component";
   readonly nodeAttributeSelector: string;
   readonly components: AbsComponentList;
-  private componentsClassList;
+  private registeredComponentsList;
   registerComponent(templateReferenceName: string, scriptClass: new (node: HTMLElement) => AbsComponent): void;
   initComponents(scopeNode?: HTMLElement): void;
   initComponent(componentNode: HTMLElement): void;
