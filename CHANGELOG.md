@@ -13,7 +13,7 @@ Module codebase:
 
 Repository management:
 
-* [EDIT] For ease of setup the module "copyfiles" is now installed as dev dependency and not used as globally installed; the build script has been edited accordingly
+* [EDIT] For ease of setup the module "copyfiles" has been replaced with the use of "fs-extra", "glob" and a new build util file dedicated to copying files; the build script has been edited accordingly
 
 ### 1.2.0
 
