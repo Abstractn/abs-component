@@ -1,5 +1,5 @@
 export interface AbsComponent {
-  init: () => void;
+  init?: () => void;
   ready?: () => void;
   destroy?: () => void;
   node: HTMLElement;
@@ -39,15 +39,13 @@ export class AbsComponentManager {
         }
         const ComponentClass = this.registeredComponentsList[componentClassName];
         const componentInstance = new ComponentClass(componentNode as HTMLElement);
-        componentInstance.init();
+        componentInstance.init && componentInstance.init();
         this.components[componentClassName].push(componentInstance);
       });
 
       componentNodeList.forEach((componentNode) => {
         const componentInstance = this.getComponentByNode(componentNode as HTMLElement) as AbsComponent;
-        if(componentInstance.ready) {
-          componentInstance.ready();
-        }
+        componentInstance.ready && componentInstance.ready();
       });
     } catch (error) {
       if(Array.isArray(error)) {
@@ -68,11 +66,9 @@ export class AbsComponentManager {
       }
       const ComponentClass = this.registeredComponentsList[componentClassName];
       const componentInstance = new ComponentClass(componentNode);
-      componentInstance.init();
+      componentInstance.init && componentInstance.init();
       this.components[componentClassName].push(componentInstance);
-      if(componentInstance.ready) {
-        componentInstance.ready();
-      }
+      componentInstance.ready && componentInstance.ready();
     } catch (error) {
       if(Array.isArray(error)) {
         console.error(...error);
@@ -101,9 +97,9 @@ export class AbsComponentManager {
         const subComponentsNodeList = component.node.querySelectorAll(`[${this.nodeAttributeSelector}]`);
         subComponentsNodeList.forEach(subComponentNode => {
           const subComponentReference = this.getComponentByNode(subComponentNode as HTMLElement);
-          if(subComponentReference) this.destroyComponent(subComponentReference);
+          subComponentReference && this.destroyComponent(subComponentReference);
         });
-        if(component.destroy) component.destroy();
+        component.destroy && component.destroy();
         
         component.node.remove();
         
@@ -121,7 +117,7 @@ export class AbsComponentManager {
           document.querySelector(`[${this.nodeAttributeSelector}="${componentAttributeName}"]`)
         );
         
-        if(!isComponentAlive) this.destroyComponent(component);
+        !isComponentAlive && this.destroyComponent(component);
       });
     });
   }
