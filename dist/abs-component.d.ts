@@ -1,5 +1,5 @@
 export interface AbsComponent {
-  init: () => void;
+  init?: () => void;
   ready?: () => void;
   destroy?: () => void;
   node: HTMLElement;

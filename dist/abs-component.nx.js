@@ -9,7 +9,8 @@ class AbsComponentManager {
     }
     initComponents(scopeNode) {
         try {
-            (scopeNode || document).querySelectorAll(`[${this.nodeAttributeSelector}]`).forEach((componentNode) => {
+            const componentNodeList = (scopeNode || document).querySelectorAll(`[${this.nodeAttributeSelector}]`);
+            componentNodeList.forEach((componentNode) => {
                 const componentClassName = componentNode.getAttribute(this.nodeAttributeSelector);
                 if (componentClassName === null)
                     throw [`[ABS] The following node's component data attribute value is null:`, componentNode];
@@ -20,15 +21,12 @@ class AbsComponentManager {
                 }
                 const ComponentClass = this.registeredComponentsList[componentClassName];
                 const componentInstance = new ComponentClass(componentNode);
-                componentInstance.init();
+                componentInstance.init && componentInstance.init();
                 this.components[componentClassName].push(componentInstance);
             });
-            Object.keys(this.components).forEach(componentName => {
-                this.components[componentName].forEach(component => {
-                    if (component.ready) {
-                        component.ready();
-                    }
-                });
+            componentNodeList.forEach((componentNode) => {
+                const componentInstance = this.getComponentByNode(componentNode);
+                componentInstance.ready && componentInstance.ready();
             });
         }
         catch (error) {
@@ -52,11 +50,9 @@ class AbsComponentManager {
             }
             const ComponentClass = this.registeredComponentsList[componentClassName];
             const componentInstance = new ComponentClass(componentNode);
-            componentInstance.init();
+            componentInstance.init && componentInstance.init();
             this.components[componentClassName].push(componentInstance);
-            if (componentInstance.ready) {
-                componentInstance.ready();
-            }
+            componentInstance.ready && componentInstance.ready();
         }
         catch (error) {
             if (Array.isArray(error)) {
@@ -85,11 +81,9 @@ class AbsComponentManager {
                 const subComponentsNodeList = component.node.querySelectorAll(`[${this.nodeAttributeSelector}]`);
                 subComponentsNodeList.forEach(subComponentNode => {
                     const subComponentReference = this.getComponentByNode(subComponentNode);
-                    if (subComponentReference)
-                        this.destroyComponent(subComponentReference);
+                    subComponentReference && this.destroyComponent(subComponentReference);
                 });
-                if (component.destroy)
-                    component.destroy();
+                component.destroy && component.destroy();
                 component.node.remove();
                 const componentIndex = this.components[componentName].indexOf(component);
                 this.components[componentName].splice(componentIndex, 1);
@@ -101,8 +95,7 @@ class AbsComponentManager {
             this.components[componentName].forEach(component => {
                 const componentAttributeName = component.node.getAttribute(this.nodeAttributeSelector);
                 const isComponentAlive = Boolean(document.querySelector(`[${this.nodeAttributeSelector}="${componentAttributeName}"]`));
-                if (!isComponentAlive)
-                    this.destroyComponent(component);
+                !isComponentAlive && this.destroyComponent(component);
             });
         });
     }
