@@ -7,7 +7,7 @@
   "scripts": {
     "cleanDist": "rimraf dist",
     "buildTypescript": "tsc",
-    "copyTypescript": "node ./node_modules/copyfiles/index.js -f ./src/*.ts dist",
+    "copyTypescript": "node ./build-utils/copyFiles.js './src/*.ts' './dist'",
     "generateNxScript": "node ./build-utils/generateNxScript.js ./dist/abs-component.js",
     "build": "npm run cleanDist && npm run buildTypescript && npm run copyTypescript && npm run generateNxScript"
   },
@@ -34,7 +34,8 @@
     "module"
   ],
   "devDependencies": {
-    "copyfiles": "^2.4.1",
+    "fs-extra": "^11.2.0",
+    "glob": "^10.3.12",
     "rimraf": "^5.0.5",
     "typescript": "^5.2.2"
   }
