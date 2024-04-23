@@ -29,7 +29,8 @@ export class AbsComponentManager {
 
   public initComponents(scopeNode?: HTMLElement): void {
     try {
-      (scopeNode || document).querySelectorAll(`[${this.nodeAttributeSelector}]`).forEach((componentNode) => {
+      const componentNodeList = (scopeNode || document).querySelectorAll(`[${this.nodeAttributeSelector}]`);
+      componentNodeList.forEach((componentNode) => {
         const componentClassName = componentNode.getAttribute(this.nodeAttributeSelector);
         if(componentClassName === null) throw [`[ABS] The following node's component data attribute value is null:`, componentNode];
         if(this.registeredComponentsList[componentClassName] === undefined) throw `[ABS] Component initializer error: component "${componentClassName}" is not registered`;
@@ -41,12 +42,12 @@ export class AbsComponentManager {
         componentInstance.init();
         this.components[componentClassName].push(componentInstance);
       });
-      Object.keys(this.components).forEach(componentName => {
-        this.components[componentName].forEach(component => {
-          if(component.ready) {
-            component.ready();
-          }
-        })
+
+      componentNodeList.forEach((componentNode) => {
+        const componentInstance = this.getComponentByNode(componentNode as HTMLElement) as AbsComponent;
+        if(componentInstance.ready) {
+          componentInstance.ready();
+        }
       });
     } catch (error) {
       if(Array.isArray(error)) {
