@@ -10,6 +10,23 @@ This module allows you to define classes and associate an instance of them to an
 Its implementation remains rather simple and the main goal in mind is to give users a basic way of organizing the scripts for different elements in a page, especially in small projects such as static websites.
 
 
+## Development:
+
+> Ignore this if you don't intend to contribute on the project
+
+Make sure you have the Node version 15 or greater.
+
+A simple `npm install` will get everything needed for development.
+
+Edit files under `/src` folder.
+
+Once tested, commited and pushed in a development branch it will be merged over to main branch (through pull request if needed) and a new dist build will be generated with `npm run build`.
+
+The build is then pushed to remote together with package version increase and publish.
+
+Development branch can then be realligned with main branch.
+
+
 ## Installation:
 
 #### - As module
@@ -65,9 +82,13 @@ class MyComponent {
   // The constructor receives an HTMLElement parameter
   // that is the DOM node reference
   // that the component is associated to
+
+  // add `public` keyword to `node` for Typescript
+  // recommended to add `readonly` keyword too to `node` for Typescript
   constructor (node) {}
 
-  // All components are required to define an `init` function
+  // All components are recommended to define an `init` function
+  // but it's not required if know what to do
   init() {}
 
   // Then usually but optionally there is a `ready` function
@@ -213,7 +234,7 @@ flowchart TB
 
 There is currently no well-structured way for components to communicate with each other but the module still offers a bare-minimum possibility.
 
-The component manager offers a read only `components` object that looks like a record of names of registered components containing an array of how many of each component is present in the page.
+The component manager offers a read only `components` object that looks like a record of names of registered components containing an array of how many instances of each component is present in the page.
 
 ```typescript
 console.log(absComponentManager.components);
